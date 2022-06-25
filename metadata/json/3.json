@@ -1,0 +1,17 @@
+{
+    "name": "Pearl NFT No. 3",
+    "description": "Pearl NFT Collection",
+    "image": "https://gateway.pinata.cloud/ipfs/QmRP9NmAwZecqrqtoeoyoUrpU2cSrPBnT1xkEJutP4Zu6L/3.png",
+    "animation_url": "",
+    "external_url": "",
+    "attributes": [
+        {
+            "trait_type": "bear market", 
+            "value": "2022"
+        },
+        {
+            "trait_type": "position", 
+            "value": "slashing the market"
+        }
+    ]
+}

@@ -1,4 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -51,10 +53,15 @@ module.exports = {
       accounts: [ process.env.ADMIN_PRIVATE_KEY ],
       gas: 2100000, gasPrice: 8000000000
     },
-    mumbai: {
+    rinkeby: {
       url: process.env.RINKEBY_RPC,
       accounts: [ process.env.ADMIN_PRIVATE_KEY ],
       gas: 2100000, gasPrice: 8000000000
     },
+  },
+  etherscan: {
+    apiKey: {
+      polygonMumbai: process.env.POLYGONSCAN_API_KEY
+    }
   }
 };

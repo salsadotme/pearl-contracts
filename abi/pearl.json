@@ -226,11 +226,6 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_projectOwner",
-          "type": "address"
-        },
-        {
           "internalType": "string",
           "name": "_yampServer",
           "type": "string"

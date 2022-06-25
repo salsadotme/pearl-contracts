@@ -20,7 +20,7 @@ describe("Pearl", function () {
     it('Owner can set yamp server.', async function() {
         const project1Address = await project1.getAddress();
         console.log("project1Address: ", project1Address);
-        await pearl.setYampServer(project1Address, 'project1.yamp.chat');
+        await pearl.connect(project1).setYampServer('project1.yamp.chat');
         const project1YampServer = await pearl.yampServers(project1Address);
         assert(project1YampServer == 'project1.yamp.chat', 'yamp server not set');
     })

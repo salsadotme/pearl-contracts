@@ -10,6 +10,11 @@ async function main() {
   await pearl.deployed();
 
   console.log("Pearl deployed to:", pearl.address);
+
+  // const NftCollection = await hre.ethers.getContractFactory("NftCollection");
+  // const nftCollection = await NftCollection.deploy("yamp.yamp.chat");
+
+  // await nftCollection.deployed();
 }
 
 // We recommend this pattern to be able to use async/await everywhere

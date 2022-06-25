@@ -45,12 +45,9 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         emit DefaultYampServerUpdated(_defaultYampServer);
     }
 
-    function setYampServer(address _projectOwner, string memory _yampServer)
-        public
-        onlyOwner
-    {
-        yampServers[_projectOwner] = _yampServer;
-        emit YampServerUpdated(_projectOwner, _yampServer);
+    function setYampServer(string memory _yampServer) public {
+        yampServers[msg.sender] = _yampServer;
+        emit YampServerUpdated(msg.sender, _yampServer);
     }
 
     /* 1. Unlock MetaMask account
