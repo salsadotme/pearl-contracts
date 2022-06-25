@@ -71,14 +71,14 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         string memory _message,
         uint _nonce,
         bytes memory signature
-    ) public returns (string memory) {
+    ) public view returns (string memory) {
         require(
             verify(_signer, _to, _amount, _message, _nonce, signature),
             "Signer not valid"
         );
 
         string memory _yampServer = yampServers[_signer];
-        bytes(_yampServer).length > 0 ? _yampServer : defaultYampServer;
+        return bytes(_yampServer).length > 0 ? _yampServer : defaultYampServer;
     }
 
     function verify(
