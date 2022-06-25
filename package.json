@@ -2,10 +2,10 @@
   "name": "pearl-contracts",
   "version": "0.0.1",
   "private": true,
-  "scripts": {   
+  "scripts": {
     "chain": "hardhat node",
     "test": "npx hardhat test",
-    "deploy": "npx hardhat run scripts/deploy.js --network x"    
+    "deploy": "npx hardhat run scripts/deploy.js --network mumbai"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
@@ -16,6 +16,7 @@
     "hardhat": "^2.9.9"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.6.0"
+    "@openzeppelin/contracts": "^4.6.0",
+    "dotenv": "^16.0.1"
   }
 }
