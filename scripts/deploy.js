@@ -5,7 +5,7 @@ async function main() {
 
   // We get the contract to deploy
   const Pearl = await hre.ethers.getContractFactory("Pearl");
-  const pearl = await Pearl.deploy();
+  const pearl = await Pearl.deploy("yamp.yamp.chat");
 
   await pearl.deployed();
 
