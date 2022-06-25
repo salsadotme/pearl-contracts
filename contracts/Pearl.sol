@@ -7,12 +7,15 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Pearl is ReentrancyGuard, Ownable, Pausable {
-    string defaultYampServer = ""; //"yamp.yamp.chat"
+    string public defaultYampServer = ""; //"yamp.yamp.chat"
     mapping(address => string) public yampServers;
 
     // Events
-    event YampServerUpdated(address indexed _projectOwner, string memory indexed _yampServer);
-    event DefaultYampServerUpdated(string memory indexed _defaultYampServer);
+    event YampServerUpdated(
+        address indexed _projectOwner,
+        string indexed _yampServer
+    );
+    event DefaultYampServerUpdated(string indexed _defaultYampServer);
 
     constructor(string memory _defaultYampServer) {
         defaultYampServer = _defaultYampServer;
@@ -26,11 +29,11 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         emit DefaultYampServerUpdated(_defaultYampServer);
     }
 
-    function setYampServer(address projectOwner, string memory _yampServer)
+    function setYampServer(address _projectOwner, string memory _yampServer)
         public
         onlyOwner
     {
-        yampServers[projectOwner] = _yampServer;
+        yampServers[_projectOwner] = _yampServer;
         emit YampServerUpdated(_projectOwner, _yampServer);
     }
 
@@ -68,11 +71,13 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         string memory _message,
         uint _nonce,
         bytes memory signature
-    ) public pure returns (string memory) {
+    ) public returns (string memory) {
+        require(
+            verify(_signer, _to, _amount, _message, _nonce, signature),
+            "Signer not valid"
+        );
 
-        require(verify(_signer, _to, _amount, _message, _nonce, signature), "Signer not valid");
-
-        _yampServer = yampServers[_signer];
+        string memory _yampServer = yampServers[_signer];
         bytes(_yampServer).length > 0 ? _yampServer : defaultYampServer;
     }
 
