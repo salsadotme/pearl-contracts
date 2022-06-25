@@ -6,6 +6,22 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+/* Pearl Signature Verification
+
+How to Sign and Verify
+# Signing
+1. Create message to sign
+2. Hash the message
+3. Sign the hash
+*. The signer should have a yamp server set in the sc
+
+# Verify
+1. Recreate hash from the original message
+2. Recover signer from signature and hash
+3. Compare recovered signer to claimed signer
+4. Once it's validated return yamp server
+*/
+
 contract Pearl is ReentrancyGuard, Ownable, Pausable {
     string public defaultYampServer = ""; //"yamp.yamp.chat"
     mapping(address => string) public yampServers;
@@ -37,6 +53,20 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         emit YampServerUpdated(_projectOwner, _yampServer);
     }
 
+    /* 1. Unlock MetaMask account
+    ethereum.enable()
+    */
+
+    /* 2. Get message hash to sign
+    getMessageHash(
+        0x111,
+        123,
+        "Pearl message...",
+        1
+    )
+
+    hash = "0x123456789"
+    */
     function getMessageHash(
         address _to,
         uint _amount,
@@ -46,6 +76,17 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         return keccak256(abi.encodePacked(_to, _amount, _message, _nonce));
     }
 
+    /* 3. Sign message hash
+    # using browser
+    account = "account of signer, i.e. nft project owner"
+    ethereum.request({ method: "personal_sign", params: [account, hash]}).then(console.log)
+
+    # using web3
+    web3.personal.sign(hash, web3.eth.defaultAccount, console.log)
+
+    Signature will be different for different accounts
+    0x999
+    */
     function getEthSignedMessageHash(bytes32 _messageHash)
         public
         pure
@@ -64,7 +105,7 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
             );
     }
 
-    function getYampServer(
+    function verifyAndGetYampServer(
         address _signer,
         address _to,
         uint _amount,
@@ -81,6 +122,15 @@ contract Pearl is ReentrancyGuard, Ownable, Pausable {
         return bytes(_yampServer).length > 0 ? _yampServer : defaultYampServer;
     }
 
+    /* 4. Verify signature
+    signer = 0x222
+    to = 0x111
+    amount = 123
+    message = "Pearl message..."
+    nonce = 1
+    signature =
+        0x999
+    */
     function verify(
         address _signer,
         address _to,
