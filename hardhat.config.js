@@ -43,25 +43,30 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    celo: {
+    "celo-alfajores": {
       url: process.env.CELO_RPC,
       accounts: [ process.env.ADMIN_PRIVATE_KEY ],
       gas: 2100000, gasPrice: 8000000000
     },
-    mumbai: {
+    "polygon-mumbai": {
       url: process.env.MUMBAI_RPC,
       accounts: [ process.env.ADMIN_PRIVATE_KEY ],
       gas: 2100000, gasPrice: 8000000000
     },
-    rinkeby: {
+    "eth-rinkeby": {
       url: process.env.RINKEBY_RPC,
+      accounts: [ process.env.ADMIN_PRIVATE_KEY ],
+      gas: 2100000, gasPrice: 8000000000
+    },
+    "optimism-kovan": {
+      url: process.env.OPTIMISM_RPC,
       accounts: [ process.env.ADMIN_PRIVATE_KEY ],
       gas: 2100000, gasPrice: 8000000000
     },
   },
   etherscan: {
     apiKey: {
-      polygonMumbai: process.env.POLYGONSCAN_API_KEY
+      polygonMumbai: process.env.POLYGONSCAN_API_KEY,
     }
   }
 };

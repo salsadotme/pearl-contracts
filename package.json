@@ -5,7 +5,10 @@
   "scripts": {
     "chain": "hardhat node",
     "test": "npx hardhat test",
-    "deploy": "npx hardhat run scripts/deploy.js --network mumbai"
+    "deploy_alfajores": "npx hardhat run scripts/deploy.js --network celo-alfajores",
+    "deploy_mumbai": "npx hardhat run scripts/deploy.js --network polygon-mumbai",
+    "deploy_rinkeby": "npx hardhat run scripts/deploy.js --network eth-rinkeby",
+    "deploy_optimism": "npx hardhat run scripts/deploy.js --network optimism-kovan"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
