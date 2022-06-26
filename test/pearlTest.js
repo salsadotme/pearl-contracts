@@ -19,7 +19,7 @@ describe("Pearl", function () {
 
     it('Owner can set yamp server.', async function() {
         const project1Address = await project1.getAddress();
-        console.log("project1Address: ", project1Address);
+        // console.log("project1Address: ", project1Address);
         await pearl.connect(project1).setYampServer('project1.yamp.chat');
         const project1YampServer = await pearl.yampServers(project1Address);
         assert(project1YampServer == 'project1.yamp.chat', 'yamp server not set');
@@ -42,8 +42,8 @@ describe("Pearl", function () {
     
         const ethHash = await pearl.getEthSignedMessageHash(hash)
     
-        console.log("signer          ", signer.address)
-        console.log("recovered signer", await pearl.recoverSigner(ethHash, sig))
+        // console.log("signer          ", signer.address)
+        // console.log("recovered signer", await pearl.recoverSigner(ethHash, sig))
     
         // Correct signature and message returns true
         expect(

@@ -1,41 +1,40 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract NFTCollection is ERC721, Ownable {
+contract NFTCollection is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
     using Strings for uint256;
+    string public baseTokenURI;
 
-    Counters.Counter private _tokenIdCounter;
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
 
-    constructor() ERC721("Pearl", "PRL") {}
+    function mint() public returns (uint256) {
+        _tokenIds.increment();
 
-    modifier callerIsUser() {
-        require(
-            tx.origin == msg.sender,
-            "NFTCollection :: Cannot be called by a contract"
+        uint256 newItemId = _tokenIds.current();
+        _mint(msg.sender, newItemId);
+        _setTokenURI(
+            newItemId,
+            "https://gateway.pinata.cloud/ipfs/QmbbA1YRjzSpSbUdaqoW1wiQU8MRYTaHK6fZPJCyWJEMpW/"
         );
-        _;
+
+        return newItemId;
     }
 
-    function _baseURI() internal pure override returns (string memory) {
-        return
-            "https://gateway.pinata.cloud/ipfs/QmbbA1YRjzSpSbUdaqoW1wiQU8MRYTaHK6fZPJCyWJEMpW/";
+    function setTokenURI(string memory _baseTokenURI) external onlyOwner {
+        baseTokenURI = _baseTokenURI;
     }
 
-    function safeMint() public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(msg.sender, tokenId);
-    }
-
-    function mint(uint256 _quantity) external payable callerIsUser {
-        // require(_quantity <= 3, "NFTCollection :: Below 3");
-        _safeMint(msg.sender, _quantity);
+    function _baseURI() internal view virtual override returns (string memory) {
+        return baseTokenURI;
     }
 
     function tokenURI(uint256 tokenId)
@@ -50,7 +49,12 @@ contract NFTCollection is ERC721, Ownable {
             "NFTCollection: URI query for nonexistent token"
         );
 
-        string memory baseURI = _baseURI();
-        return string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));
+        //string memory baseURI = _baseURI();
+        return
+            bytes(baseTokenURI).length > 0
+                ? string(
+                    abi.encodePacked(baseTokenURI, tokenId.toString(), ".json")
+                )
+                : "";
     }
 }

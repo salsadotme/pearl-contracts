@@ -8,6 +8,9 @@
 **Optimism Kovan** => [0xEd821C17e96a71082FB90d9DEEF1344E0c8e6f65](https://kovan-optimistic.etherscan.io/address/0xed821c17e96a71082fb90d9deef1344e0c8e6f65) <br />
 **XDAI Testnet** => [0xDb9129C91dB96e14d610ad5dAa06c0C7B782E0c3](https://blockscout.com/poa/sokol/address/0xDb9129C91dB96e14d610ad5dAa06c0C7B782E0c3/transactions) <br />
 
+____________________________________________________________________________________
+**NFT Collection** => [0x680FB61E15173a7a085ae82996e25B5Bd31F5C9C](https://rinkeby.etherscan.io/address/0x680FB61E15173a7a085ae82996e25B5Bd31F5C9C) <br />
+
 Commands
 
 ```shell

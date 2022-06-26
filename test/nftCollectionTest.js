@@ -13,18 +13,15 @@ describe("NFTCollection", function () {
 
     it('NftCollection deploys.', async function() {
         const NftCollection = await ethers.getContractFactory('NFTCollection');
-        nftCollection = await NftCollection.deploy();
+        nftCollection = await NftCollection.deploy("PearlNFT", "PRL");
         await nftCollection.deployed();
+        await nftCollection.setTokenURI("https://gateway.pinata.cloud/ipfs/QmbbA1YRjzSpSbUdaqoW1wiQU8MRYTaHK6fZPJCyWJEMpW/");
     })
 
     it('Owner can mint.', async function() {
-
-        await nftCollection.mint(3);
-        let some = await nftCollection.tokenURI(1);
-        // tokenURI
-        console.log("some: ", some);
-        // const tokenURI1 = await nftCollection.tokenURI(1);
-        // assert(tokenURI1 == 'https://gateway.pinata.cloud/ipfs/QmbbA1YRjzSpSbUdaqoW1wiQU8MRYTaHK6fZPJCyWJEMpW/1.json', 'something wrong with the collection');
+        await nftCollection.mint();
+        let tokenURI1 = await nftCollection.tokenURI(1);
+        assert(tokenURI1 == 'https://gateway.pinata.cloud/ipfs/QmbbA1YRjzSpSbUdaqoW1wiQU8MRYTaHK6fZPJCyWJEMpW/1.json', 'something wrong with the collection');
     })
 
 });
