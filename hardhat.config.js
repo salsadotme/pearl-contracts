@@ -63,6 +63,11 @@ module.exports = {
       accounts: [ process.env.ADMIN_PRIVATE_KEY ],
       gas: 2100000, gasPrice: 8000000000
     },
+    "xdai-testnet": {
+      url: process.env.XDAI_RPC,
+      accounts: [ process.env.ADMIN_PRIVATE_KEY ],
+      gas: 2100000, gasPrice: 8000000000
+    },
   },
   etherscan: {
     apiKey: {
